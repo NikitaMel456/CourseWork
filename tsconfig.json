@@ -1,9 +1,10 @@
 {
   "db": {
-    "host": "ec2-184-73-202-79.compute-1.amazonaws.com",
-    "name": "d37a2fo7sn4nrn",
-    "user": "vtgpywqgorbivw",
-    "password": "e3cc112085610fab25eee08705dfa58234e2a93c585244e697b1da9ad0ad74a4",
+    "host": "ec2-50-19-232-205.compute-1.amazonaws.com",
+    "name": "d2th3jrohudmoi",
+    "user": "ioometgjahdzsz",
+    "port":5432,
+    "password": "f03380b9c7c27ad9a2fd5a9e75438d6e98ddabf90398147b256c494fff109d40",
     "dialect": "postgres"
   }
 }
