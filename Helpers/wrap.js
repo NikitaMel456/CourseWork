@@ -1,3 +1,4 @@
 module.exports = fn =>
-    (req, res, next) =>
-        fn(req, res, next).catch(next);
+    (req, res, next) =>{
+    console.log("midddle");
+        fn(req, res, next).catch(next)};

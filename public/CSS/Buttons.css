@@ -1,0 +1,19 @@
+a.glo{
+    color:#a3b4d6;
+
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+
+    display: block;
+    background-image: linear-gradient(to left,transparent,transparent 50%,#a3b4d6 50%,#a3b4d6);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+    font: 400 18px tahoma;
+    border: 1px solid #a3b4d6;
+}
+a.glo:hover {
+    background-position: 0 0;
+    color:#fff;
+}

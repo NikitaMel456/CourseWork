@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My posts</title>
+    <link href="CSS/div.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="Scripts/URLparm.js"></script>
+    <script>
+        function del(id,idP) {
+            $.ajax({
+                url: '/api/users/'+id+'/posts/'+idP,
+                type: 'DELETE',
+                success: function(result) {
+                    // Do something with the result
+                    location.reload();
+                }
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            let defpage = 1;
+            var idC = getUrlParameter('id');
+            $.getJSON("/api/users/" + idC + "/posts", function (data, textStatus, jqXHR) {
+                var out = "";
+                out += "<br><button onclick=\"location.href = 'index.html'\">Main</button>";
+                for (let key in data) {
+
+                    let id = null;
+                    for (let datta in data[key]) {
+                        if (datta == 'id')
+                            id = data[key][datta];
+                        if (datta == 'Title') {
+                            out +=" <link href=\"CSS/div.css\" rel=\"stylesheet\" type=\"text/css\"><div class='block'>"+ (datta + ": " + "<a href=\"post.html?id=" + id + "\">" + data[key][datta] + "</a>");
+
+                        }
+                        if(datta == 'content'){
+                            out +="<br>"+ ( datta + ": " + data[key][datta] + "<br>");
+                        }
+                        if(datta== 'publishedOn'){
+                            out+="<button onclick='del("+idC+","+id+")'>Delete this post</button><br>"+"</div>";
+                        }
+                    }
+
+                }
+                document.writeln("<br>" + out);
+            })
+
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

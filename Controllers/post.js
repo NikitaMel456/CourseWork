@@ -1,4 +1,6 @@
 const CrudController = require('./crud');
+const helpers = require('../Helpers/helper');
+const authCookie = '__service_token';
 
 class PostController extends CrudController {
     constructor(postService) {
@@ -11,19 +13,28 @@ class PostController extends CrudController {
     }
 
     async readAll(req, res){
-        req.body.authorId = req.params.userId;
+        const token = req.cookies[authCookie];
+        const userToken = helpers.verifyToken(token);
+        req.body.authorId = userToken.id;
+       // req.body.authorId = req.params.userId;
         let data = await this.service.readAll(req.body);
         res.json(data);
     }
 
     async create(req, res){
-        req.body.authorId = req.params.userId;
+        const token = req.cookies[authCookie];
+        const userToken = helpers.verifyToken(token);
+        req.body.authorId = userToken.id;
         let data = await this.service.create(req.body);
-        res.json(data);
+        //res.json(data);
+        res.redirect('http://localhost:3000/post.html?id='+ data.id);
     }
 
     async update(req, res){
-        req.body.authorId = req.params.userId;
+        const token = req.cookies[authCookie];
+        const userToken = helpers.verifyToken(token);
+        req.body.authorId = userToken.id;
+        //req.body.authorId = req.params.userId;
         let data = await this.service.update(req.params.id, req.body);
         res.json(data);
     }

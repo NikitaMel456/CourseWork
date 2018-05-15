@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+    </script>
+    <script>
+        function post() {
+            $(document).ready(function () {
+
+                    var id = getUrlParameter('id');
+                    $.getJSON("/api/posts/"+id, function (data, textStatus, jqXHR) {
+                        var out = "";
+                        for (let key in data) {
+                            if (key == 'Title' || key == 'content' || key == 'City' || key == 'Salary' || key == 'Author' || key == 'publishedOn') {
+                                out += ( key + ": " + data[key] + "<br>");
+                                $("div").html(out);
+                            }
+                        }
+                        document.writeln("<a href=\"index.html\">Main page</a><link href=\"CSS/div.css\" rel=\"stylesheet\" type=\"text/css\">");
+                        document.writeln("<div class='block' style='margin: 250 auto;'>"+out+"</div>");
+                    })
+
+            });
+        }
+    </script>
+</head>
+<body onload="javascript:post()">
+
+</body>
+</html>

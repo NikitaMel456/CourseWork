@@ -1,11 +1,14 @@
 const express = require('express');
 const wrap = require('../helpers/wrap');
+const helpers = require('../Helpers/helper');
+const authCookie = '__service_token';
 
 class CrudController {
     constructor(service) {
         this.service = service;
 
         this.readAll = this.readAll.bind(this);
+        this.readWhere = this.readWhere.bind(this);
         this.read = this.read.bind(this);
         this.create = this.create.bind(this);
         this.update = this.update.bind(this);
@@ -14,19 +17,26 @@ class CrudController {
         this.router = express.Router({mergeParams: true});
         this.routes = {
             '/': [
-                { method: 'get', cb: this.readAll },
-                { method: 'post', cb: this.create }
+                {method: 'get', cb: this.readAll},
+                {method: 'post', cb: this.create},
+                {method: 'head', cb: this.readWhere}
             ],
             '/:id': [
-                { method: 'get', cb: this.read },
-                { method: 'put', cb: this.update },
-                { method: 'delete', cb: this.delete }
+                {method: 'get', cb: this.read},
+                {method: 'put', cb: this.update},
+                {method: 'delete', cb: this.delete}
             ]
         };
     }
 
     async readAll(req, res) {
         let data = await this.service.readChunk(req.query);
+        res.json(data);
+    }
+
+    async readWhere(req, res) {
+        console.log('where');
+        let data = await this.service.readWhere(req.query);
         res.json(data);
     }
 
@@ -37,7 +47,8 @@ class CrudController {
 
     async create(req, res) {
         let data = await this.service.create(req.body);
-        res.json(data);
+        res.redirect('http://localhost:3000/index.html');
+        //res.json(data);
     }
 
     async update(req, res) {
@@ -46,8 +57,14 @@ class CrudController {
     }
 
     async delete(req, res) {
-        let data =  await this.service.delete(req.params.id);
-        res.json(data);
+        console.log('delete');
+        const token = req.cookies[authCookie];
+        const userToken = helpers.verifyToken(token);
+        console.log(userToken.id);
+        let data = await this.service.delete(req.params.id);
+       // res.redirect('http://localhost:3000/Myposts.html?id='+userToken.id);
+        res.redirect('http://localhost:3000/index.html');
+
     }
 
     registerRoutes() {

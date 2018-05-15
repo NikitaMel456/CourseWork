@@ -5,12 +5,17 @@ class PostsController extends CrudController{
         super(Service);
 
         this.readAll = this.readAll.bind(this);
-
+        this.readWhere = this.readWhere.bind(this);
         this.registerRoutes();
     }
 
     async readAll(req, res){
         let data = await this.service.readChunk(req.query);
+        res.json(data);
+    }
+    async readWhere(req, res){
+        console.log(req.query);
+        let data = await this.service.readWhere(req.query);
         res.json(data);
     }
 }

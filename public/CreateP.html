@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="CSS/form.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Your job offer</title>
+    <script>
+        function timeDate() {
+           document.getElementById('publishedOn').value = Date();
+        }
+    </script>
+</head>
+<body onload="timeDate()">
+<h2>Post creation:</h2>
+<form method="post" action="http://localhost:3000/api/users/:id/posts" name="contact_form" class="contact_form">
+    <input type="text" name="Title" id="Title" placeholder="Title" required> <br>
+    <input type="text" name="content" id="content" placeholder="Content" required><br>
+    <input type="text" name="City" id="City" placeholder="City" required><br>
+    <input type="text" name="Contact" id="Contact" placeholder="Contact" required><br>
+    <input type="text" name="Salary" id="Salary" placeholder="Salary" required><br>
+    <input type="text" name="Author" id="Author" placeholder="Author" required><br>
+    <input type="text" name="publishedOn" id="publishedOn" readonly required><br>
+    <input type="submit" value="Publish" style="height: 30px" ></input>
+</form>
+</body>
+</html>

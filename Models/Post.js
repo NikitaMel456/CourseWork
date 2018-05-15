@@ -19,14 +19,13 @@ module.exports = (Sequelize, sequelize) => {
             Default:"Not mentioned"
         },
         Salary:{
-            type:Sequelize.STRING,
-            Default:"Not mentioned"
+            type:Sequelize.INTEGER
         },
         Author:{
             type:Sequelize.STRING,
         },
         publishedOn: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
         }
     });
 };

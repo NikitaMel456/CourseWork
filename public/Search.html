@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" type="text/css" href="CSS/Buttons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        function ff() {
+            let city = document.getElementById('city').value;
+            let salary = document.getElementById('salary').value;
+            let url = "/api/posts?";
+            if (city != "") {
+                url += "city=" + city;
+            }
+            else if (salary != "") {
+                url += "&salary=" + salary;
+            }
+            $(document).ready(function () {
+                $.getJSON(url, function (data, textStatus, jqXHR) {
+                    var out = "";
+                    for (let key in data) {
+                        out += "<br>";
+                        let id = null;
+                        for (let datta in data[key]) {
+                            if (datta == 'id')
+                                id = data[key][datta];
+                            if (datta == 'Title') {
+                                out +="<div>"+ (datta + ": " + "<a href=\"post.html?id=" + id + "\">" + data[key][datta] + "</a></div>");
+                            }
+                        }
+
+                    }
+                    let ff = "<button onclick=\"location.href = 'Search.html'\">Back</button>";
+                    document.writeln(ff + "<br>" + out);
+                })
+
+            });
+
+        }
+    </script>
+
+
+</head>
+<body>
+<button onclick="location.href = 'index.html'">Main</button>
+<br><br>
+<input type="text" id="city" name="city" placeholder="City"><br>
+<input type="number" id="salary" name="salary" placeholder="Salary"><br>
+<a onclick="ff()" class="glo">Search</a>
+</body>
+</html>

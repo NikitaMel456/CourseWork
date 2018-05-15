@@ -1,5 +1,6 @@
 const CrudService = require('./crud');
 const validator = require('../helpers/validation');
+const bcrypt = require('bcryptjs');
 
 class UserService extends CrudService{
     constructor(repository){
@@ -8,6 +9,7 @@ class UserService extends CrudService{
 
     async create(data){
         const validRes = validator.check('post'. data);
+        data.password=bcrypt.hashSync(data.password);
         if(validRes.error){
             return{code:400, message:'validation error'};
         }
@@ -17,8 +19,6 @@ class UserService extends CrudService{
     }
 
     async update(id, data){
-        console.log(id);
-        console.log(data);
         const validRes = validator.check('post'. data);
         if(validRes.error){
             return{code:400, message:'validation error'};

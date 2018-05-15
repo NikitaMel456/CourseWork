@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="CSS/form.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<button onclick="location.href = 'index.html'">Main</button><br><br>
+<h2>Registration of new user</h2>
+<form method="post" action="http://localhost:3000/api/users" name="contact_form" class="contact_form">
+    <input type="text" name="name" id="name" placeholder="Name" required><br>
+    <input type="text" name="email" id="email" placeholder="Email" required><br>
+    <input type="password" name="password" id="password" placeholder="Password" required><br>
+    <input type="text" name="phonenunber" id="phonenunber" placeholder="Phone number" required><br>
+    <input type="submit" value="Register" style="height: 30px">
+</form>
+</body>
+</html>

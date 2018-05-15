@@ -1,0 +1,303 @@
+swagger: '2.0'
+info:
+  title: courseWork/CourseWork
+  version: 1.0.0
+host: localhost:3000
+schemes:
+  - http
+basePath: /api/
+produces:
+  - application/json
+paths:
+  /posts:
+    get:
+      summary: Get posts
+      tags:
+        - Posts
+      responses:
+        '200':
+          description: Success 
+          schema:
+            type: object
+            properties:
+              posts:
+                type: array
+                items:
+                  $ref: '#/definitions/Post'
+        '404':
+          description: Invalid data
+  '/posts/{id}':
+    get:
+      summary: Get post by id
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Person item
+          schema:
+            $ref: '#/definitions/Post'
+        '404':
+          description: Not found
+    put:
+      summary: Update post
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        '200':
+          discription: Updated post
+          schema:
+            $ref: '#/definitions/Post'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete post
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Post deleted
+        '500':
+          description: Server error
+  '/users/{id}/posts':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+    get:
+      summary: Get user's posts
+      tags:
+        - Posts
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              posts:
+                type: array
+                items:
+                  $ref: '#/definitions/Post'
+        '500':
+          description: Server error
+    post:
+      summary: Create post
+      tags:
+        - Post
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        '200':
+          description: Post created
+          schema:
+            $ref: '#/definitions/Post'
+        '500':
+          description: Server error
+  '/users/{userId}/posts/{id}':
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        type: number
+    get:
+      summary: Get user's post by id
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Post 
+          schema:
+            $ref: '#/definitions/Post'
+        '500':
+          description: Server error
+    put:
+      summary: Update user's post
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+        - name: userId
+          in: path
+          required: true
+          type: number
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        '200':
+          description: Ingestion updated
+          schema:
+            $ref: '#/definitions/Post'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete user's post
+      tags:
+        - Post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Post deleted
+        '500':
+          description: Server error
+  /users:
+    get:
+      summary: Get user
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              user:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+        '500':
+          description: Server error
+    post:
+      summary: Create user
+      tags:
+        - User
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: User created
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Server error
+  '/users/{id}':
+    get:
+      summary: Get user by id
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: user item
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Server error
+    put:
+      summary: Update user
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: User updated
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete user
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+      responses:
+        '200':
+          description: User deleted
+        '500':
+          description: Server error
+definitions:
+  Post:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      Title:
+        type: string
+      Content:
+        type: string
+      City:
+        type: string
+      Contact:
+        type: string
+      Salary:
+        type: number
+        format: integer
+      Author:
+        type: string
+      publishOn:
+        type: string
+
+  User:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      name:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phonenuber:
+        type: string

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+         {
+            background: url(../public/CSS/images/maxresdefault.jpg) repeat 50% 50%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="CSS/Buttons.css">
+    <link href="CSS/div.css" rel="stylesheet" type="text/css">
+    <title>Title</title>
+    <h1 style="text-align: center">Available jobs: </h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="Scripts/URLparm.js"></script>
+    <script>
+        $(document).ready(function () {
+            let defpage = 1;
+            var page = getUrlParameter('page');
+            if(page != undefined)
+                defpage=page;
+                $.getJSON("/api/posts", function (data, textStatus, jqXHR) {
+                    var out = "";
+
+                    for (let key in data) {
+                        out += "<br>";
+                        let id = null;
+                        for (let datta in data[key]) {
+//                            if(datta != 'createdAt' && datta != 'updatedAt' && datta != 'id'&& datta !='deletedAt' && datta != 'authorId') {
+//                                out += ( datta + ": " + data[key][datta] + "<br>");
+//                                $("div").html(out);
+//                            }
+                            if (datta == 'id')
+                                id = data[key][datta];
+                            if (datta == 'Title') {
+                                out +="<div class='block'>"+ (datta + ": " + "<a href=\"post.html?id=" + id + "\">" + data[key][datta] + "</a>");
+
+                            }
+                            if(datta == 'content'){
+                                out +="<br>&nbsp&nbsp&nbsp"+ ( data[key][datta] + "</div><br>");
+                                $("div").html(out);
+                            }
+                        }
+
+                    }
+
+                })
+
+        });
+    </script>
+</head>
+<body>
+<a onclick="location.href = 'Search.html'" class="glo" style="margin: 0 auto;">Search</a>
+<a onclick="location.href = 'http://localhost:3000/CreateP'" class="glo" style="margin: 0 auto;">Create</a>
+<a onclick="location.href = 'http://localhost:3000/Myposts'" class="glo" style="margin: 0 auto;">My posts</a>
+<br>
+<div></div>
+</body>
+</html>
