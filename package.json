@@ -1,0 +1,14 @@
+{
+  "name": "CrsW",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "latest",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "joi": "^13.2.0",
+    "jsonwebtoken": "^8.2.1",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.6"
+  }
+}
