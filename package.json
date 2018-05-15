@@ -1,8 +1,9 @@
 {
   "name": "CrsW",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "node index.js",
     "start": "node index.js"
   },
   "engines": {
