@@ -1,5 +1,5 @@
-const CrudService = require('./crud');
-const validator = require('../helpers/validation');
+const CrudService = require('./Crud');
+const validator = require('../Helpers/validation');
 const bcrypt = require('bcryptjs');
 
 class UserService extends CrudService{

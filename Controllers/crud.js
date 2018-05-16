@@ -1,5 +1,5 @@
 const express = require('express');
-const wrap = require('../helpers/wrap');
+const wrap = require('../Helpers/wrap');
 const helpers = require('../Helpers/helper');
 const authCookie = '__service_token';
 

@@ -1,9 +1,10 @@
+'use strict';
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParse = require('body-parser');
 //services
-const UserService = require('./services/user');
-const PostService = require('./services/post');
+const UserService = require('./Services/user');
+const PostService = require('./Services/post');
 const path = require("path");
 //////
 const helpers = require('./Helpers/helper');
@@ -23,7 +24,7 @@ module.exports = (db, config) => {
     );
 
     //controllers
-    const apiController = require('./controllers/api')(
+    const apiController = require('./Controllers/api')(
         userService,
         postService
     );
@@ -32,7 +33,7 @@ module.exports = (db, config) => {
     app.use(bodyParse.json());
     app.use(express.static('public'));
     app.use(cookieParser());
-    var urlencodedParser = bodyParse.urlencoded({extended: false});
+    let  urlencodedParser = bodyParse.urlencoded({extended: false});
     app.use(express.static(path.join(__dirname, 'public')));
     /////////////////////////////////////
     app.use('/CreateP', async (req, res) => {
@@ -59,7 +60,7 @@ module.exports = (db, config) => {
         else {
             res.sendFile(__dirname + '/public/login.html');
         }
-    })
+    });
 
     app.post('/login',urlencodedParser, async (req, res) => {
         const user = await db.users.findOne({
@@ -79,7 +80,7 @@ module.exports = (db, config) => {
             res.cookie(authCookie, newToken);
             res.redirect(`http://localhost:3000/`);
         }
-    })
+    });
 
 
     app.get('/Myposts',urlencodedParser, (req, res) => {
@@ -93,7 +94,7 @@ module.exports = (db, config) => {
         else {
             res.sendFile(__dirname + '/public/login.html');
         }
-    })
+    });
 /////////////////////////////////////
 
     app.use('/api',urlencodedParser, apiController);
