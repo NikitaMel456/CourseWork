@@ -64,7 +64,6 @@ class CrudController {
         let data = await this.service.delete(req.params.id);
        // res.redirect('http://localhost:3000/Myposts.html?id='+userToken.id);
         res.redirect('http://localhost:3000/index.html');
-
     }
 
     registerRoutes() {
