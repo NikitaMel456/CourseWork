@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const wrap = require('../Helpers/wrap');
 const helpers = require('../Helpers/helper');

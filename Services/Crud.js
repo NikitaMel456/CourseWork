@@ -1,4 +1,4 @@
-
+'use strict';
 const Op = require("sequelize/lib/operators");
 
 class CrudService {

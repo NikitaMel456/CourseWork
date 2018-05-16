@@ -1,3 +1,4 @@
+'use strict';
 module.exports = fn =>
     (req, res, next) =>{
     console.log("midddle");

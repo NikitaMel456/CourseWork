@@ -1,3 +1,4 @@
+'use strict';
 const CrudService = require('./Crud');
 const validator = require('../Helpers/validation');
 const bcrypt = require('bcryptjs');

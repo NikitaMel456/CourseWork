@@ -1,3 +1,4 @@
+'use strict';
 const CrudController = require('./crud');
 const helpers = require('../Helpers/helper');
 const authCookie = '__service_token';
