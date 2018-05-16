@@ -27,7 +27,8 @@ class PostController extends CrudController {
         req.body.authorId = userToken.id;
         let data = await this.service.create(req.body);
         //res.json(data);
-        res.redirect('http://localhost:3000/post.html?id='+ data.id);
+     //   res.redirect('http://localhost:3000/post.html?id='+ data.id);
+        res.redirect("/post.html?id="+ data.id);
     }
 
     async update(req, res){

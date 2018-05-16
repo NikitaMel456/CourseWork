@@ -5,7 +5,7 @@ pg.defaults.ssl = true;
 module.exports = (Sequelize, config) => {
     const options = {
         host: config.db.host,
-        dialect: 'postgres',// 'mysql',
+        dialect: config.db.dialect,//'postgres',// 'mysql',
         logging: false,
         define: {
             timestamps: true,

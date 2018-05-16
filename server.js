@@ -43,10 +43,12 @@ module.exports = (db, config) => {
 //             const user = await db.users.findById(userToken.id);
 // console.log(req.body);
 //             res.json(user);
-            res.sendFile(__dirname + '/public/CreateP.html')
+          //  res.sendFile(__dirname + '/public/CreateP.html')
+            res.redirect("/CreateP.html");
         }
         else {
-            res.redirect('http://localhost:3000/login');
+           // res.redirect('http://localhost:3000/login');
+            res.redirect("/login.html");
         }
     });
 
@@ -58,7 +60,8 @@ module.exports = (db, config) => {
             res.redirect(req.query.callback + `?source/protected-resource&token=${token}`);
         }
         else {
-            res.sendFile(__dirname + '/public/login.html');
+           // res.sendFile(__dirname + '/public/login.html');
+            res.redirect("/login.html");
         }
     });
 
@@ -78,7 +81,8 @@ module.exports = (db, config) => {
                 'secret',
                 {expiresIn: 30 * 60});
             res.cookie(authCookie, newToken);
-            res.redirect(`http://localhost:3000/`);
+            //res.redirect(`http://localhost:3000/`);
+            res.redirect("/index.html");
         }
     });
 
@@ -89,17 +93,20 @@ module.exports = (db, config) => {
         if (helpers.verifyToken(token)) {
             const userToken = helpers.verifyToken(token);
 
-            res.redirect("http://localhost:3000/Myposts.html?id="+userToken.id);
+           // res.redirect("http://localhost:3000/Myposts.html?id="+userToken.id);
+            res.redirect("/Myposts.html?id="+userToken.id);
         }
         else {
-            res.sendFile(__dirname + '/public/login.html');
+            //res.sendFile(__dirname + '/public/login.html');
+            res.redirect("/login.html");
         }
     });
 /////////////////////////////////////
 
     app.use('/api',urlencodedParser, apiController);
     app.use('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public/index.html'));
+        //res.sendFile(path.join(__dirname, 'public/index.html'));
+        res.redirect("/login.html");
     });
 
     // app.use('/api/posts/2',(req,res)=>{
